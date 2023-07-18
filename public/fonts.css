@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Cascadia Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(CascadiaMono.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Cascadia Mono PL';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(CascadiaMonoPL.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Cascadia Code';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(CascadiaCode.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Hack';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(Hack-Regular.ttf) format('truetype');
+}
