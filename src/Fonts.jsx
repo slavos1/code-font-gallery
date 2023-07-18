@@ -3,7 +3,7 @@ export const SOURCES = {
   Github: "https://github.com/",
 };
 
-const FONTS = [
+export const FONTS = [
   {
     fontFamily: "monospace",
     title: "Default monospace",
@@ -41,5 +41,3 @@ const FONTS = [
     subtitle: "A typeface designed for source code",
   },
 ];
-
-export default FONTS;

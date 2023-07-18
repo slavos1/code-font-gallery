@@ -1,7 +1,7 @@
 export const CODE_BLOCKS = [
   {
     lang: "javascript",
-    text: `const a = x != y;
+    text: `const a = x != y + 0.142;
 // XXX this is tricky 
 if( u !== undefined ){
     return 'is undef';

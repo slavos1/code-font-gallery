@@ -1,10 +1,11 @@
 import Grid from "./Grid";
-import Fonts from "./Fonts";
+import { FONTS } from "./Fonts";
 import Showcase from "./Showcase";
 import { CODE_BLOCKS } from "./CodeBlocks";
 import { Box, Button, Link, Typography } from "@mui/material";
 import { useState } from "./useState";
-import HiliteStyle, { DEFAULT_STYLE } from "./HiliteStyle";
+import HiliteStyleSelect from "./HiliteStyleSelect";
+import { DEFAULT_STYLE } from "./HiliteStyles";
 
 const replaceValueAt = (array, idx, value) => {
   console.log("array before=", array);
@@ -21,7 +22,7 @@ const replaceValueAt = (array, idx, value) => {
 const App = () => {
   const [expanded, setExpanded] = useState(
     "expanded.all",
-    Array(Fonts.length).fill(false)
+    Array(FONTS.length).fill(false)
   );
   const [hiliteStyle, setHiliteStyle] = useState("hilite.style", DEFAULT_STYLE);
 
@@ -81,13 +82,13 @@ const App = () => {
               </Button>
             </Grid>
             <Grid>
-              <HiliteStyle value={hiliteStyle} setValue={setHiliteStyle} />
+              <HiliteStyleSelect value={hiliteStyle} setValue={setHiliteStyle} />
             </Grid>
           </Grid>
         </Grid>
 
         {/* fonts */}
-        {Fonts.map((fontDef, idx) => (
+        {FONTS.map((fontDef, idx) => (
           <Grid key={idx} xs={12} sm={6} md={3}>
             <Showcase
               expanded={expanded[idx]}
@@ -95,7 +96,7 @@ const App = () => {
                 setExpanded(replaceValueAt(expanded, idx, value))
               }
               codeBlocks={CODE_BLOCKS}
-              styleIndex={hiliteStyle}
+              styleName={hiliteStyle}
               {...fontDef}
             />
           </Grid>

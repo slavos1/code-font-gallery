@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -13,13 +12,11 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { SOURCES } from "./Fonts";
-// import { Highlighter } from "rc-highlight";
 import SyntaxHighlighter from "react-syntax-highlighter";
-// import { useState } from "./useState";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { getStyle } from "./HiliteStyle";
+import { getStyle } from "./HiliteStyles";
 
-const StyledBox = ({ fontFamily, children, sx, ...rest }) => {
+const StyledBox = ({ fontFamily, children, ...rest }) => {
   const StyledElement = styled(Box)({
     "& pre": {
       borderRadius: 8,
@@ -30,6 +27,12 @@ const StyledBox = ({ fontFamily, children, sx, ...rest }) => {
   });
 
   return <StyledElement {...rest}>{children}</StyledElement>;
+};
+
+StyledBox.propTypes = {
+  fontFamily: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.any),
+  rest: PropTypes.any,
 };
 
 const capitalize = (string) => {
@@ -57,39 +60,26 @@ const Showcase = ({
   expanded,
   setExpanded,
   footer,
-  styleIndex
+  styleName,
 }) => {
-  // const [expanded, setExpanded] = useState(
-  //   `showcase.${fontFamily}.enabled`,
-  //   false
-  // );
   const fontFamilyCss = `${fontFamily}, monospace`;
-  const sourceLinkButton = source && SOURCES[source] && (
-    <Button
-      color="secondary"
-      variant="outlined"
-      href={`${SOURCES[source]}${slug || fontFamily}`}
-      rel="noopener noreferrer nofollow noindex"
-      target="_blank"
-    >
-      See at {source}
-    </Button>
-  );
-  const sourceLink = source && SOURCES[source] && (
-    <Link
-      href={`${SOURCES[source]}${slug || fontFamily}`}
-      rel="noopener noreferrer nofollow noindex"
-      target="_blank"
-    >
-      {title || fontFamily}
-    </Link>
-  ) || title;
+  const sourceLink =
+    (source && SOURCES[source] && (
+      <Link
+        href={`${SOURCES[source]}${slug || fontFamily}`}
+        rel="noopener noreferrer nofollow noindex"
+        target="_blank"
+      >
+        {title || fontFamily}
+      </Link>
+    )) ||
+    title;
 
   const renderedBlocks = codeBlocks.map((code, idx) => (
     <Box key={idx}>
       <Typography variant="h6">{capitalize(code.lang)}</Typography>
       {/* <SyntaxHighlighter language={code.lang} style={tomorrowNightBright}> */}
-      <SyntaxHighlighter language={code.lang} style={getStyle(styleIndex)}>
+      <SyntaxHighlighter language={code.lang} style={getStyle(styleName)}>
         {code.text}
       </SyntaxHighlighter>
     </Box>
@@ -108,7 +98,6 @@ const Showcase = ({
         </StyledBox>
       </CardContent>
       <CardActions>
-        {/* {sourceLinkButton} */}
         <Typography paragraph>{footer}</Typography>
         <ExpandMore
           expand={expanded}
@@ -127,6 +116,13 @@ Showcase.propTypes = {
   codeBlocks: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  fontFamily: PropTypes.string,
+  source: PropTypes.string,
+  slug: PropTypes.string,
+  expanded: PropTypes.bool,
+  setExpanded: PropTypes.func,
+  footer: PropTypes.string,
+  styleName: PropTypes.string,
 };
 
 export default Showcase;
