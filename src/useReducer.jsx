@@ -11,7 +11,7 @@ export const useReducer = (reducer, initState) => {
   const dispatch = useCallback(
     (action) => {
       const nextState = reducer(state, action);
-      console.log("state=", state, "=>", nextState);
+      // console.log("state=", state, "=>", nextState);
       setState(nextState);
     },
     [setState, state, reducer]

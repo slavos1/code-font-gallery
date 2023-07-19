@@ -12,9 +12,9 @@ export const initialState = {
 };
 
 const replaceValueAt = (array, idx, value) => {
-  console.log("array before=", array);
+  // console.log("array before=", array);
   const updated = [...array.slice(0, idx), value, ...array.slice(idx + 1)];
-  console.log("array before=", updated);
+  // console.log("array before=", updated);
   return updated;
 };
 

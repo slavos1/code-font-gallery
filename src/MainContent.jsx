@@ -7,12 +7,13 @@ import { useContext } from "react";
 import { Context } from "./Context";
 import Grid from "./Grid";
 import { FONT_DEFS } from "./font-defs";
+import VersionInfo from "./VersionInfo";
 
 const MainContent = () => {
   const { context, dispatch } = useContext(Context);
   // const { fontSize } = context.highlight;
   const isDevel = import.meta.env.DEV && import.meta.env.MODE == "development";
-  console.log("import.meta.env=", import.meta.env)
+  // console.log("import.meta.env=", import.meta.env);
 
   return (
     <Box sx={{ m: 1 }}>
@@ -108,6 +109,10 @@ const MainContent = () => {
             />
           </Grid>
         ))}
+
+        <Grid xs={12}>
+          <VersionInfo />
+        </Grid>
       </Grid>
     </Box>
   );

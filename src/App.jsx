@@ -6,7 +6,7 @@ import MainContent from "./MainContent";
 const App = () => {
   const [context, dispatch] = useReducer(reducer, initialState);
 
-  console.log("context=", JSON.stringify(context));
+  // console.log("context=", JSON.stringify(context));
 
   return (
     <Context.Provider value={{ context, dispatch }}>
