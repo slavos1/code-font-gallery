@@ -11,6 +11,9 @@ export const initialState = {
   },
 };
 
+// import.meta.env is Vite concept
+export const IS_DEVEL = import.meta.env.DEV && import.meta.env.MODE == "development";
+
 const replaceValueAt = (array, idx, value) => {
   // console.log("array before=", array);
   const updated = [...array.slice(0, idx), value, ...array.slice(idx + 1)];

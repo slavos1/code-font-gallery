@@ -8,42 +8,18 @@ import { Context } from "./Context";
 import Grid from "./Grid";
 import { FONT_DEFS } from "./font-defs";
 import VersionInfo from "./VersionInfo";
+import Blurb from "./Blurb";
+import { IS_DEVEL } from "./reducer";
 
 const MainContent = () => {
   const { context, dispatch } = useContext(Context);
-  // const { fontSize } = context.highlight;
-  const isDevel = import.meta.env.DEV && import.meta.env.MODE == "development";
-  // console.log("import.meta.env=", import.meta.env);
 
   return (
     <Box sx={{ m: 1 }}>
       <Grid container columnSpacing={1} rowSpacing={1}>
         {/* intro */}
         <Grid xs={12}>
-          <Typography variant="h3">Code Font Gallery</Typography>
-          <Typography variant="subtitle2" gutterBottom>
-            Side-by-side comparison of some fonts for coding
-          </Typography>
-          <Typography variant="body1" paragraph>
-            Inspired by{" "}
-            <Link
-              href="https://kinsta.com/blog/best-programming-fonts/"
-              rel="noopener noreferrer nofollow noindex"
-              target="_blank"
-            >
-              15 Best Programming Fonts for Better Coding
-            </Link>
-            . Here you can quickly see various fonts in &quot;action&quot; with
-            code samples. Highlighting styles come from the list in the{" "}
-            <Link
-              href="https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_STYLES_HLJS.MD"
-              rel="noopener noreferrer nofollow noindex"
-              target="_blank"
-            >
-              <tt>react-syntax-highlighter</tt> documentation
-            </Link>
-            .
-          </Typography>
+          <Blurb />
         </Grid>
 
         {/* input */}
@@ -83,7 +59,7 @@ const MainContent = () => {
               //   value={fontSize} setValue={setFontSize}
               />
             </Grid>
-            {isDevel && (
+            {IS_DEVEL && (
               <Grid>
                 <Box variant="pre">context={JSON.stringify(context)}</Box>
               </Grid>
