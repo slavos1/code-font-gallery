@@ -21,7 +21,7 @@ import {
   zenburn,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const STYLES = {
+const HILITE_STYLES = {
   a11yDark,
   a11yLight,
   agate,
@@ -43,7 +43,7 @@ const STYLES = {
   tomorrowNightBright,
   zenburn,
 };
-
 export const DEFAULT_STYLE = "agate";
-export const getStyleNames = () => Object.keys(STYLES);
-export const getStyle = (name) => STYLES[name];
+export const STYLE_NAMES = Object.keys(HILITE_STYLES);
+
+export const getStyle = (name) => HILITE_STYLES[name] || DEFAULT_STYLE;

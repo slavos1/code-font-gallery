@@ -1,13 +1,13 @@
-export const SOURCES = {
+export const FONT_SOURCES = {
   "Google Fonts": "https://fonts.google.com/specimen/",
   Github: "https://github.com/",
 };
 
-export const FONTS = [
+export const FONT_DEFS = [
   {
     fontFamily: "monospace",
     title: "Default monospace",
-    subtitle: 'Default browser "monospace" font',
+    body: 'Default "monospace" font as defined in your browser.',
   },
   {
     fontFamily: "Roboto Mono",
@@ -21,14 +21,14 @@ export const FONTS = [
     fontFamily: "Cascadia Code",
     source: "Github",
     slug: "microsoft/cascadia-code",
-    subtitle: 'Has ligatures',
-    footer: 'Notice many ligatures; for example, "::", "!=", "!==", "->" and "<=>".',
+    subtitle: 'With ligatures',
+    body: 'Notice ligatures for "::", "!=", "!==", "->" and "<=>" and others.',
   },
   {
     fontFamily: "Cascadia Mono",
     source: "Github",
     slug: "microsoft/cascadia-code",
-    subtitle: "Like Cascadia Code but no ligatures",
+    subtitle: "Like Cascadia Code without ligatures",
   },
   {
     fontFamily: "Fira Mono",

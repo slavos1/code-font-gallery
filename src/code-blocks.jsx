@@ -1,7 +1,8 @@
 export const CODE_BLOCKS = [
   {
     lang: "javascript",
-    text: `const a = x != y + 0.142;
+    text: `import { useState } from 'react';
+const a = x != y + 0.142;
 // XXX this is tricky 
 if( u !== undefined ){
     return 'is undef';
@@ -12,8 +13,7 @@ if( u !== undefined ){
     lang: "c++",
     text: `#include <string>
 // XXX this is tricky 
-if( c != nullptr
-  && c->head == "a" ){
+if( c != nullptr && c->head == "a" ){
   return std::string();
 }
 `,
@@ -29,7 +29,10 @@ _Some_ *silly* text:
 * [ ] zero=0
 * [x] LOBOTOMY
 
+> Quote myself
+
 [source,c++]
+.This is a code sample
 ----
 // this is just fun
 unsigned int i{123};

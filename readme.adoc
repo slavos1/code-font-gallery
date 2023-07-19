@@ -1,0 +1,20 @@
+= Gallery of coding fonts
+:icons: font
+:source-highlighter: pygments
+:pygments-css: class
+
+== eslint notes
+
+After some testing, I figured an eslint quirk (more specifically of "eslint-plugin-react-refresh") that the constants need to have at least *two words* joined together with an underscore, otherwise the plugin will complain like:
+
+> Fast refresh only works when a file only export components. Use a new file to share constant or functions between components
+
+[source,javascript]
+.Code examples
+----
+// this fails linting
+export const STYLES = {...}
+
+// this is ok with linting, notice two words joined together
+export const MY_STYLES = {...}
+----
