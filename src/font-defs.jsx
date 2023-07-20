@@ -5,11 +5,12 @@ export const FONT_SOURCES = {
   Github: "https://github.com/",
 };
 
-export const FONT_DEFS = [
+export const _FONT_DEFS = [
   {
     fontFamily: "monospace",
     title: "Default monospace",
     body: 'Default "monospace" font as defined in your browser.',
+    order: -1,
   },
   {
     fontFamily: "Roboto Mono",
@@ -31,7 +32,6 @@ export const FONT_DEFS = [
     source: "Github",
     slug: "microsoft/cascadia-code",
     subtitle: "Cascadia Code + powerline symbols",
-    body: 'Notice ligatures for "::", "!=", "!==", "->" and "<=>" and others.',
   },
   {
     fontFamily: "Cascadia Mono",
@@ -68,4 +68,37 @@ export const FONT_DEFS = [
     fontFamily: "Anonymous Pro",
     source: "Google Fonts",
   },
+  {
+    fontFamily: "Iosevka Curly",
+    source: "Github",
+    subtitle: "With ligatures",
+    slug: "be5invis/Iosevka",
+  },
+  {
+    fontFamily: "Iosevka Fixed Curly",
+    source: "Github",
+    subtitle: "No ligatures",
+    slug: "be5invis/Iosevka",
+  },
+  {
+    fontFamily: "Ubuntu Mono",
+    href: "https://design.ubuntu.com/font",
+  },
 ];
+
+const fontSort = (a) =>
+  a.toSorted((x, y) => {
+    let keyX, keyY;
+    if (x.order !== undefined && y.order !== undefined) {
+      [keyX, keyY] = [x.order, y.order];
+    } else if (x.order !== undefined) {
+      return -1;
+    } else if (y.order !== undefined) {
+      return 1;
+    } else {
+      [keyX, keyY] = [x.fontFamily, y.fontFamily];
+    }
+    return keyX < keyY ? -1 : keyX > keyY ? 1 : 0;
+  });
+
+export const FONT_DEFS = fontSort(_FONT_DEFS);

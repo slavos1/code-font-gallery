@@ -14,6 +14,12 @@ import { IS_DEVEL } from "./reducer";
 const MainContent = () => {
   const { context } = useContext(Context);
 
+  const debug = null && IS_DEVEL && (
+    <Grid>
+      <Box>context={JSON.stringify(context)}</Box>
+    </Grid>
+  );
+
   return (
     <Box sx={{ m: 1 }}>
       <Grid container columnSpacing={1} rowSpacing={2}>
@@ -30,23 +36,13 @@ const MainContent = () => {
           <Grid xs={6} md={3}>
             <FontSizeSelect />
           </Grid>
-          {IS_DEVEL && (
-            <Grid>
-              <Box>context={JSON.stringify(context)}</Box>
-            </Grid>
-          )}
+          {debug}
         </Grid>
 
         {/* fonts */}
         <Grid container spacing={1}>
           {FONT_DEFS.map((fontDef, idx) => (
-            <Grid
-              id={fontDef.fontFamily}
-              key={idx}
-              xs={12}
-              sm={6}
-              md={3}
-            >
+            <Grid id={fontDef.fontFamily} key={idx} xs={12} sm={6} md={3}>
               <Showcase
                 position={idx}
                 codeBlocks={CODE_BLOCKS}

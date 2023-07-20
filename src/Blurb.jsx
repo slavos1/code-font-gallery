@@ -7,10 +7,11 @@ const Blurb = () => {
       <Typography variant="h3">Code Font Gallery</Typography>
       <Box sx={{ mb: 2 }}>
         <Typography variant="subtitle1" component="em">
-          Side-by-side comparison of some fonts for coding
+          Side-by-side comparison of fonts for coding
         </Typography>
       </Box>
       <Typography variant="body1" paragraph>
+        Inspired by{" "}
         <Link
           href="https://kinsta.com/blog/best-programming-fonts/"
           rel="noopener noreferrer nofollow noindex"
@@ -19,7 +20,7 @@ const Blurb = () => {
           15 Best Programming Fonts for Better Coding
         </Link>
         . Here you can see several various fixed-width fonts in
-        &quot;action&quot; with code samples for your to compare.
+        &quot;action&quot; with code samples to compare.
         {IS_DEVEL && (
           <>
             {" "}
@@ -34,6 +35,16 @@ const Blurb = () => {
             .
           </>
         )}
+      </Typography>
+      <Typography paragraph>
+        <Link
+          href="https://coding-fonts.netlify.app/"
+          rel="noopener noreferrer nofollow noindex"
+          target="_blank"
+        >
+          Coding Fonts
+        </Link>{" "}
+        by CSS Tricks has more fonts with sample texts.
       </Typography>
     </Box>
   );

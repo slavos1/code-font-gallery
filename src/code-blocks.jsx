@@ -23,11 +23,29 @@ def cli():
 
 if __name__ == "__main__":
     cli()
-`
+`,
   },
   {
     lang: "c++",
     text: `#include <string>
+
+#ifdef DEBUG
+#define LOG(x) out << x
+#endif
+
+namespace Graph
+{
+  template <class T>
+  class Point: private Base
+  {
+    // a point class
+    public:
+      T x{0}, y{-1.42};
+      std::vector points;
+  };
+}
+
+using boost::something;
 
 // XXX this is tricky 
 if( c != nullptr && c->head == "a" ){
@@ -59,13 +77,25 @@ unsigned int i{123};
   {
     lang: "yaml",
     text: `letters:
-  abcdefghijklmnopqrstuvwxyz
-  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    Aa Bb Cc Dd Ee Ff Gg Hh
+    Ii Jj Kk Ll Mm Nn Oo Pp
+    Qq Rr Ss Tt Uu Vv Ww Xx
+    Yy Zz
 digits:
   0123456789
 punctuation:
   !"#$%&'()*+,-./:;<=>?
   @[\\]^_\`{|}~
 `,
+  },
+  {
+    lang: "text",
+    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et
+dolore magna aliqua.
+
+Lorem ipsum != real text.
+`,
+    noLineNumbers:true,
   },
 ];

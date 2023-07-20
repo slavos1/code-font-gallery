@@ -72,21 +72,22 @@ const Showcase = ({
 
   const fontFamilyCss = `${fontFamily}, monospace`;
   const sourceHref = href || `${FONT_SOURCES[source]}${slug || fontFamily}`;
-  console.log(
-    "sourceHref=",
-    sourceHref,
-    "href=",
-    href,
-    "position=",
-    position,
-    "fontFamily=",
-    fontFamily,
-    "source=",
-    source,
-    "slug=",
-    slug
-  );
+  // console.log(
+  //   "sourceHref=",
+  //   sourceHref,
+  //   "href=",
+  //   href,
+  //   "position=",
+  //   position,
+  //   "fontFamily=",
+  //   fontFamily,
+  //   "source=",
+  //   source,
+  //   "slug=",
+  //   slug
+  // );
   const sourceLink =
+    title ||
     (sourceHref && (
       <Link
         href={sourceHref}
@@ -95,9 +96,8 @@ const Showcase = ({
       >
         {title || fontFamily}
       </Link>
-    )) ||
-    title;
-  const titleComponent = sourceLink;
+    ));
+  const titleComponent = <Typography variant="h6">{sourceLink}</Typography>;
 
   const renderedBlocks = codeBlocks.map((code, idx) => (
     // XXX letter-spacing must be 0 for ligatures to work!
@@ -108,7 +108,7 @@ const Showcase = ({
       <SyntaxHighlighter
         language={code.lang}
         style={getStyle(context.highlight.style)}
-        showLineNumbers={true}
+        showLineNumbers={code.noLineNumbers !== true}
       >
         {code.text.trim()}
       </SyntaxHighlighter>
@@ -174,6 +174,7 @@ Showcase.propTypes = {
   fontSize: PropTypes.string,
   boxShadow: PropTypes.number,
   body: PropTypes.string,
+  href: PropTypes.string,
 };
 
 export default Showcase;
