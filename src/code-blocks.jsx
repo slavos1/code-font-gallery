@@ -1,7 +1,8 @@
 export const CODE_BLOCKS = [
   {
     lang: "javascript",
-    text: `import { useState } from 'react';
+    text: `// ██ <- powerline symbols
+import { useState } from 'react';
 const a = x != y + 0.142;
 // XXX this is tricky 
 if( u !== undefined ){

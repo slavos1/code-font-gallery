@@ -25,6 +25,13 @@ export const FONT_DEFS = [
     body: 'Notice ligatures for "::", "!=", "!==", "->" and "<=>" and others.',
   },
   {
+    fontFamily: "Cascadia Code PL",
+    source: "Github",
+    slug: "microsoft/cascadia-code",
+    subtitle: 'Cascadia Code + powerline symbols',
+    body: 'Notice ligatures for "::", "!=", "!==", "->" and "<=>" and others.',
+  },
+  {
     fontFamily: "Cascadia Mono",
     source: "Github",
     slug: "microsoft/cascadia-code",

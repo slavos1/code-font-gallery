@@ -1,6 +1,6 @@
 import Showcase from "./Showcase";
 import { CODE_BLOCKS } from "./code-blocks";
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import HiliteStyleSelect from "./HiliteStyleSelect";
 import FontSizeSelect from "./FontSizeSelect";
 import { useContext } from "react";

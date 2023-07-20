@@ -19,6 +19,7 @@ import {
   nightOwl,
   srcery,
   zenburn,
+  rainbow
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const HILITE_STYLES = {
@@ -35,6 +36,7 @@ const HILITE_STYLES = {
   monokaiSublime,
   nightOwl,
   paraisoDark,
+  rainbow,
   solarizedDark,
   solarizedLight,
   srcery,

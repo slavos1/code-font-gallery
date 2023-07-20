@@ -1,12 +1,7 @@
-import { Alert, AlertTitle, Box, Link, Typography } from "@mui/material";
-import { FONT_DEFS } from "./font-defs";
+import { Box, Link, Typography } from "@mui/material";
 import { IS_DEVEL } from "./reducer";
 
 const Blurb = () => {
-  const googleHosted = FONT_DEFS.filter((def) => def.source == "Google Fonts")
-    .map((def) => def.fontFamily)
-    .join(", ");
-
   return (
     <Box sx={{ mb: 2 }}>
       <Typography variant="h3">Code Font Gallery</Typography>
@@ -26,7 +21,8 @@ const Blurb = () => {
         &quot;action&quot; with code samples for your to compare.
         {IS_DEVEL && (
           <>
-            {" "}Highlighting styles come from the list in the{" "}
+            {" "}
+            Highlighting styles come from the list in the{" "}
             <Link
               href="https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_STYLES_HLJS.MD"
               rel="noopener noreferrer nofollow noindex"
@@ -38,12 +34,6 @@ const Blurb = () => {
           </>
         )}
       </Typography>
-
-      <Alert variant="outlined" severity="warning">
-        <AlertTitle>Warning</AlertTitle>
-        As this is work-in-progress, please note only Google Fonts-hosted fonts
-        {googleHosted && ` (${googleHosted})`} are showing correctly.
-      </Alert>
     </Box>
   );
 };

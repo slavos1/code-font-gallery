@@ -11,13 +11,26 @@ import {
   styled,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useContext } from "react";
 import { Context } from "./Context";
 import { DEFAULT_FONT_SIZE } from "./reducer";
 import { getStyle } from "./hi-styles";
 import { FONT_SOURCES } from "./font-defs";
+import {
+  javascript,
+  cpp,
+  asciidoc,
+  yaml,
+} from "react-syntax-highlighter/dist/esm/languages/hljs";
+
+// XXX this may not make much change in local dev but resulting
+// vite build is 400kB vs 1mB when not using Light
+SyntaxHighlighter.registerLanguage("javascript", javascript);
+SyntaxHighlighter.registerLanguage("c++", cpp);
+SyntaxHighlighter.registerLanguage("asciidoc", asciidoc);
+SyntaxHighlighter.registerLanguage("yaml", yaml);
 
 const StyledBox = ({ fontFamily, fontSize, children, ...rest }) => {
   const StyledElement = styled(Box)({
@@ -70,8 +83,6 @@ const Showcase = ({
 }) => {
   const { context, dispatch } = useContext(Context);
   const expanded = context.expanded[position] || false;
-  // const { fontSize, style:styleName } = ;
-  // const fontSizePercent = ;
 
   const fontFamilyCss = `${fontFamily}, monospace`;
   const sourceLink =
@@ -89,7 +100,6 @@ const Showcase = ({
   const renderedBlocks = codeBlocks.map((code, idx) => (
     <Box key={idx}>
       <Typography variant="h6">{capitalize(code.lang)}</Typography>
-      {/* <SyntaxHighlighter language={code.lang} style={tomorrowNightBright}> */}
       <SyntaxHighlighter
         language={code.lang}
         style={getStyle(context.highlight.style)}
@@ -102,10 +112,7 @@ const Showcase = ({
 
   return (
     <Card sx={{ p: 0, boxShadow, border: "solid 0px red" }}>
-      <CardHeader
-        title={sourceLink}
-        subheader={subtitle}
-      ></CardHeader>
+      <CardHeader title={sourceLink} subheader={subtitle}></CardHeader>
       <CardContent sx={{ p: 0 }}>
         <StyledBox
           fontFamily={fontFamilyCss}
@@ -123,7 +130,6 @@ const Showcase = ({
         <Typography paragraph>{footer}</Typography>
         <ExpandMore
           expand={expanded}
-          // onClick={() => setExpanded(!expanded)}
           onClick={() =>
             dispatch({
               type: "toggleOne",

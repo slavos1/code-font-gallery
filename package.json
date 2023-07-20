@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev_serve": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "./get_fonts && vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0 && echo 'Linting ok'",
     "watch_lint": "chokidar src -c 'run-s lint'",
     "preview": "vite preview",
