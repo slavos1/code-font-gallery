@@ -2,6 +2,7 @@ import { useReducer } from "./useReducer";
 import { Context } from "./Context";
 import { reducer, initialState } from "./reducer";
 import MainContent from "./MainContent";
+import DrawerAppBar from "./DrawerAppBar";
 
 const App = () => {
   const [context, dispatch] = useReducer(reducer, initialState);
@@ -10,9 +11,9 @@ const App = () => {
 
   return (
     <Context.Provider value={{ context, dispatch }}>
-      {/* <DrawerAppBar> */}
-      <MainContent />
-      {/* </DrawerAppBar> */}
+      <DrawerAppBar>
+        <MainContent />
+      </DrawerAppBar>
     </Context.Provider>
   );
 };

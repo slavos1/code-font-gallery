@@ -1,11 +1,38 @@
 = Gallery of coding fonts
 :icons: font
-:source-highlighter: pygments
-:pygments-css: class
+// :source-highlighter: pygments
+// :pygments-css: class
 
-== eslint notes
+When reading https://kinsta.com/blog/best-programming-fonts/[15 Best Programming Fonts for Better Coding] I wanted to see them all together on one page for easy comparison.
 
-After some testing, I figured an eslint quirk (more specifically of "eslint-plugin-react-refresh") that the constants need to have at least *two words* joined together with an underscore, otherwise the plugin will complain like:
+Hence this repo.
+
+You can do side-by-side comparison of several various fixed-width fonts in "action" with code samples.
+
+The font selection is somewhat random and definitely not exhaustive. Feel free to suggest link:issues[another one].
+
+== Development
+
+Prerequisites:: A POSIX platfrom with `pnp`, `bash`, `wget` and `fc-query` (Debian/Ubuntu works fine).
+
+[source,shell]
+.Run once
+----
+$ pnpm i
+$ ./get_fonts
+----
+
+[source,shell]
+.Run after
+----
+$ pnpm dev
+----
+
+NOTE: If you have added/updated/deleted fonts to/in/from `src/font-defs.jsx`, consider rerunning `./get_fonts`.
+
+=== eslint notes
+
+After some testing, I discovered an eslint quirk (more specifically of "eslint-plugin-react-refresh") that the constants need to have at least *two words* joined together with an *underscore*, otherwise the plugin will complain with something like:
 
 > Fast refresh only works when a file only export components. Use a new file to share constant or functions between components
 
@@ -18,5 +45,3 @@ export const STYLES = {...}
 // this is ok with linting, notice two words joined together
 export const MY_STYLES = {...}
 ----
-
-// comment

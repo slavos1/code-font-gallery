@@ -5,11 +5,12 @@ const Blurb = () => {
   return (
     <Box sx={{ mb: 2 }}>
       <Typography variant="h3">Code Font Gallery</Typography>
-      <Typography variant="subtitle2" gutterBottom>
-        Side-by-side comparison of some fonts for coding
-      </Typography>
+      <Box sx={{ mb: 2 }}>
+        <Typography variant="subtitle1" component="em">
+          Side-by-side comparison of some fonts for coding
+        </Typography>
+      </Box>
       <Typography variant="body1" paragraph>
-        Inspired by{" "}
         <Link
           href="https://kinsta.com/blog/best-programming-fonts/"
           rel="noopener noreferrer nofollow noindex"

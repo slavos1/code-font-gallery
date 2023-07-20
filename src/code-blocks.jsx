@@ -4,15 +4,31 @@ export const CODE_BLOCKS = [
     text: `// ██ <- powerline symbols
 import { useState } from 'react';
 const a = x != y + 0.142;
-// XXX this is tricky 
+// XXX => this is tricky 
 if( u !== undefined ){
     return 'is undef';
 }
 `,
   },
   {
+    lang: "python",
+    text: `#!/usr/bin/env python
+from loguru import Logger
+
+def cli():
+    args = parse_args()
+    if args.quiet and 1 != 0:
+        logger.setLevel("DEBUG")
+    return 1.2
+
+if __name__ == "__main__":
+    cli()
+`
+  },
+  {
     lang: "c++",
     text: `#include <string>
+
 // XXX this is tricky 
 if( c != nullptr && c->head == "a" ){
   return std::string();

@@ -1,42 +1,68 @@
-import * as React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  AppBar,
+  Box,
+  CssBaseline,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  Toolbar,
+  Typography,
+  Button,
+} from "@mui/material";
+import { useContext } from "react";
+import { Context } from "./Context";
+import Grid from "./Grid";
+import { FONT_DEFS } from "./font-defs";
+import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
 
 const DrawerAppBar = ({ children, window }) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { dispatch } = useContext(Context);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const Logo = (props) => (
+    <>
+      <Typography variant="h6" {...props}>
+        CFG
+      </Typography>
+    </>
+  );
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
+      <Logo sx={{ my: 2 }} />
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
+        <ListItem>
+          <Button
+            color="info"
+            onClick={() => dispatch({ type: "collapseAll" })}
+          >
+            Collapse all
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button
+            color="secondary"
+            onClick={() => dispatch({ type: "expandAll" })}
+          >
+            Expand all
+          </Button>
+        </ListItem>
+        {FONT_DEFS.map((fontDef, idx) => (
+          <ListItem key={idx}>
+            <Button href={`#${fontDef.fontFamily}`}>
+              {fontDef.fontFamily}
+            </Button>
           </ListItem>
         ))}
       </List>
@@ -45,6 +71,31 @@ const DrawerAppBar = ({ children, window }) => {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  const inputs = (
+    <Box sx={{ display: { xs: "none", sm: "block" } }}>
+      <Grid container spacing={1}>
+        <Grid>
+          <Button
+            variant="contained"
+            color="info"
+            onClick={() => dispatch({ type: "collapseAll" })}
+          >
+            Collapse all
+          </Button>
+        </Grid>
+        <Grid>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => dispatch({ type: "expandAll" })}
+          >
+            Expand all
+          </Button>
+        </Grid>
+      </Grid>
+    </Box>
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -60,20 +111,14 @@ const DrawerAppBar = ({ children, window }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
+          <Logo
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+            }}
+          />
+          {inputs}
         </Toolbar>
       </AppBar>
       <Box component="nav">
@@ -106,7 +151,7 @@ const DrawerAppBar = ({ children, window }) => {
 
 DrawerAppBar.propTypes = {
   window: PropTypes.func,
-  children: PropTypes.arrayOf(PropTypes.any),
+  children: PropTypes.any,
 };
 
 export default DrawerAppBar;

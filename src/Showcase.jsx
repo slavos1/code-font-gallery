@@ -11,26 +11,16 @@ import {
   styled,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useContext } from "react";
 import { Context } from "./Context";
 import { DEFAULT_FONT_SIZE } from "./reducer";
 import { getStyle } from "./hi-styles";
 import { FONT_SOURCES } from "./font-defs";
-import {
-  javascript,
-  cpp,
-  asciidoc,
-  yaml,
-} from "react-syntax-highlighter/dist/esm/languages/hljs";
-
-// XXX this may not make much change in local dev but resulting
-// vite build is 400kB vs 1mB when not using Light
-SyntaxHighlighter.registerLanguage("javascript", javascript);
-SyntaxHighlighter.registerLanguage("c++", cpp);
-SyntaxHighlighter.registerLanguage("asciidoc", asciidoc);
-SyntaxHighlighter.registerLanguage("yaml", yaml);
+import SyntaxHighlighter from "./SyntaxHighlighter";
+import GoogleIcon from "@mui/icons-material/Google";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import WebIcon from "@mui/icons-material/Web";
 
 const StyledBox = ({ fontFamily, fontSize, children, ...rest }) => {
   const StyledElement = styled(Box)({
@@ -54,10 +44,6 @@ StyledBox.propTypes = {
   rest: PropTypes.any,
 };
 
-const capitalize = (string) => {
-  return string ? string.charAt(0).toUpperCase() + string.slice(1) : string;
-};
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props; // eslint-disable-line no-unused-vars
   return <IconButton {...other} />;
@@ -77,18 +63,33 @@ const Showcase = ({
   fontFamily,
   source,
   slug,
-  footer,
   boxShadow = 1,
   body,
+  href,
 }) => {
   const { context, dispatch } = useContext(Context);
   const expanded = context.expanded[position] || false;
 
   const fontFamilyCss = `${fontFamily}, monospace`;
+  const sourceHref = href || `${FONT_SOURCES[source]}${slug || fontFamily}`;
+  console.log(
+    "sourceHref=",
+    sourceHref,
+    "href=",
+    href,
+    "position=",
+    position,
+    "fontFamily=",
+    fontFamily,
+    "source=",
+    source,
+    "slug=",
+    slug
+  );
   const sourceLink =
-    (source && FONT_SOURCES[source] && (
+    (sourceHref && (
       <Link
-        href={`${FONT_SOURCES[source]}${slug || fontFamily}`}
+        href={sourceHref}
         rel="noopener noreferrer nofollow noindex"
         target="_blank"
       >
@@ -96,10 +97,14 @@ const Showcase = ({
       </Link>
     )) ||
     title;
+  const titleComponent = sourceLink;
 
   const renderedBlocks = codeBlocks.map((code, idx) => (
-    <Box key={idx}>
-      <Typography variant="h6">{capitalize(code.lang)}</Typography>
+    // XXX letter-spacing must be 0 for ligatures to work!
+    <Box key={idx} sx={{ letterSpacing: 0 }}>
+      <Typography color="text.disabled" variant="subtitle2">
+        {code.lang.toLowerCase()}
+      </Typography>
       <SyntaxHighlighter
         language={code.lang}
         style={getStyle(context.highlight.style)}
@@ -110,16 +115,25 @@ const Showcase = ({
     </Box>
   ));
 
+  const avatarIcon = {
+    "Google Fonts": <GoogleIcon />,
+    Github: <GitHubIcon />,
+  }[source] || <WebIcon />;
+
   return (
     <Card sx={{ p: 0, boxShadow, border: "solid 0px red" }}>
-      <CardHeader title={sourceLink} subheader={subtitle}></CardHeader>
+      <CardHeader
+        avatar={avatarIcon}
+        title={titleComponent}
+        subheader={subtitle}
+      ></CardHeader>
       <CardContent sx={{ p: 0 }}>
         <StyledBox
           fontFamily={fontFamilyCss}
           fontSize={`${context.highlight.fontSize || DEFAULT_FONT_SIZE}%`}
           sx={{ p: 1 }}
         >
-          <Typography variant="body2">{body}</Typography>
+          {/* <Typography variant="body2">{body}</Typography> */}
           {renderedBlocks.slice(0, 1)}
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             {renderedBlocks.slice(1)}
@@ -127,7 +141,8 @@ const Showcase = ({
         </StyledBox>
       </CardContent>
       <CardActions>
-        <Typography paragraph>{footer}</Typography>
+        {/* <Typography paragraph>{footer}</Typography> */}
+        <Typography paragraph>{body}</Typography>
         <ExpandMore
           expand={expanded}
           onClick={() =>

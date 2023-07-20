@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev_serve": "vite --host 0.0.0.0",
-    "build": "./get_fonts && vite build",
+    "dist": "vite build",
+    "build": "run-s fonts dist",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0 && echo 'Linting ok'",
     "watch_lint": "chokidar src -c 'run-s lint'",
     "preview": "vite preview",
     "dev": "run-p -c dev_serve watch_lint",
+    "fonts": "./get_fonts",
     "test": "vitest"
   },
   "dependencies": {
