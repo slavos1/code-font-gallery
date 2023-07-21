@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import meta from "../package.json";
 import useLocalStorageState from "use-local-storage-state";
+import { logStateChange } from "./reducer";
 
 export const useReducer = (reducer, initState) => {
   const [state, setState] = useLocalStorageState(`${meta.name}/data`, {
@@ -11,7 +12,7 @@ export const useReducer = (reducer, initState) => {
   const dispatch = useCallback(
     (action) => {
       const nextState = reducer(state, action);
-      // console.log("state=", state, "=>", nextState);
+      logStateChange(action, state, nextState);
       setState(nextState);
     },
     [setState, state, reducer]

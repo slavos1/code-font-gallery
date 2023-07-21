@@ -12,13 +12,35 @@ export const initialState = {
 };
 
 // import.meta.env is Vite concept
-export const IS_DEVEL = import.meta.env.DEV && import.meta.env.MODE == "development";
+export const IS_DEVEL =
+  import.meta.env.DEV && import.meta.env.MODE == "development";
 
 const replaceValueAt = (array, idx, value) => {
   // console.log("array before=", array);
   const updated = [...array.slice(0, idx), value, ...array.slice(idx + 1)];
   // console.log("array before=", updated);
   return updated;
+};
+
+const booleansAsString = (expanded) =>
+  expanded.map((b) => (b ? "1" : "0")).join("");
+
+const stateDataForLogging = (state) => {
+  return {
+    expanded: booleansAsString(state.expanded),
+    ...state.highlight,
+  };
+};
+
+export const logStateChange = (action, state, nextState) => {
+  const groupName = `action.type='%c${action.type}%c' received`;
+  console.groupCollapsed(groupName, "color: red;", "");
+  console.table(action);
+  console.table({
+    state: stateDataForLogging(state),
+    nextState: stateDataForLogging(nextState),
+  });
+  console.groupEnd(groupName);
 };
 
 export const reducer = (state, action) => {
