@@ -1,7 +1,7 @@
 {
   "name": "code-font-gallery",
   "private": true,
-  "version": "0.2.5",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev_serve": "vite --host 0.0.0.0",
