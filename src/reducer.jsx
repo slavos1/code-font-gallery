@@ -1,33 +1,27 @@
-import { FONT_DEFS } from "./font-defs";
+import { FONT_DEFS, fontDefKey } from "./font-defs";
 import { DEFAULT_STYLE } from "./hi-styles";
+import { fromPairs } from "lodash-es";
 
 export const DEFAULT_FONT_SIZE = 80;
 
+const setAllOpen = (value = false) =>
+  fromPairs(FONT_DEFS.map((def) => [fontDefKey(def), value]));
+
 export const initialState = {
-  expanded: Array(FONT_DEFS.length).fill(false),
+  open: setAllOpen(),
   highlight: {
     style: DEFAULT_STYLE,
     fontSize: DEFAULT_FONT_SIZE,
   },
 };
 
-// import.meta.env is Vite concept
+// XXX import.meta.env is Vite concept
 export const IS_DEVEL =
   import.meta.env.DEV && import.meta.env.MODE == "development";
 
-const replaceValueAt = (array, idx, value) => {
-  // console.log("array before=", array);
-  const updated = [...array.slice(0, idx), value, ...array.slice(idx + 1)];
-  // console.log("array before=", updated);
-  return updated;
-};
-
-const booleansAsString = (expanded) =>
-  expanded.map((b) => (b ? "1" : "0")).join("");
-
 const stateDataForLogging = (state) => {
   return {
-    expanded: booleansAsString(state.expanded),
+    open: JSON.stringify(state.open, {space:"  "}),
     ...state.highlight,
   };
 };
@@ -48,13 +42,13 @@ export const reducer = (state, action) => {
     case "collapseAll": {
       return {
         ...state,
-        expanded: state.expanded.map(() => false),
+        open: setAllOpen(false),
       };
     }
     case "expandAll": {
       return {
         ...state,
-        expanded: state.expanded.map(() => true),
+        open: setAllOpen(true),
       };
     }
     case "changeStyle": {
@@ -78,11 +72,10 @@ export const reducer = (state, action) => {
     case "toggleOne": {
       return {
         ...state,
-        expanded: replaceValueAt(
-          state.expanded,
-          action.position,
-          !action.expanded
-        ),
+        open: {
+          ...state.open,
+          [action.key]: !action.open,
+        },
       };
     }
     default: {

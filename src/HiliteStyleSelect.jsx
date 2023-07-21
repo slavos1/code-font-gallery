@@ -4,7 +4,6 @@ import { DEFAULT_STYLE, STYLE_NAMES } from "./hi-styles";
 import { useContext } from "react";
 import { Context } from "./Context";
 
-// const HiliteStyleSelect = ({ value, setValue }) => {
 const HiliteStyleSelect = () => {
   const { context, dispatch } = useContext(Context);
 

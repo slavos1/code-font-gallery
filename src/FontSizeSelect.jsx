@@ -6,7 +6,6 @@ import { DEFAULT_FONT_SIZE } from "./reducer";
 
 const FONT_SIZES = [75, 80, 90, 100];
 
-// const FontSizeSelect = ({ value, setValue }) => {
 const FontSizeSelect = () => {
   const { context, dispatch } = useContext(Context);
 
@@ -16,8 +15,6 @@ const FontSizeSelect = () => {
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         label={label}
-        // value={value}
-        // onChange={(event) => setValue(event.target.value)}
         value={context.highlight.fontSize || DEFAULT_FONT_SIZE}
         onChange={(event) =>
           dispatch({

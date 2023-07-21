@@ -1,6 +1,8 @@
 // Font families are defined in public/fonts/defs.css
-// XXX polyfill for toSorted missing in Firefox < 115.x
-import 'core-js/actual/array/to-sorted';
+// XXX polyfill for "Array.toSorted" missing in Firefox < 115.x
+import "core-js/actual/array/to-sorted";
+
+export const fontDefKey = (def) => def.fontFamily;
 
 export const FONT_SOURCES = {
   "Google Fonts": "https://fonts.google.com/specimen/",

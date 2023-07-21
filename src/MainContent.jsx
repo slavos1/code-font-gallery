@@ -6,7 +6,7 @@ import FontSizeSelect from "./FontSizeSelect";
 import { useContext } from "react";
 import { Context } from "./Context";
 import Grid from "./Grid";
-import { FONT_DEFS } from "./font-defs";
+import { FONT_DEFS, fontDefKey } from "./font-defs";
 import VersionInfo from "./VersionInfo";
 import Blurb from "./Blurb";
 import { IS_DEVEL } from "./reducer";
@@ -44,9 +44,9 @@ const MainContent = () => {
           {FONT_DEFS.map((fontDef, idx) => (
             <Grid id={fontDef.fontFamily} key={idx} xs={12} sm={6} md={3}>
               <Showcase
-                position={idx}
                 codeBlocks={CODE_BLOCKS}
                 boxShadow={2}
+                defKey={fontDefKey(fontDef)}
                 {...fontDef}
               />
             </Grid>

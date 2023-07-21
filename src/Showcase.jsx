@@ -56,7 +56,6 @@ const ExpandMore = styled((props) => {
 }));
 
 const Showcase = ({
-  position,
   codeBlocks,
   title,
   subtitle,
@@ -66,26 +65,13 @@ const Showcase = ({
   boxShadow = 1,
   body,
   href,
+  defKey,
 }) => {
   const { context, dispatch } = useContext(Context);
-  const expanded = context.expanded[position] || false;
+  const open = (context.open && context.open[defKey]) || false;
 
   const fontFamilyCss = `${fontFamily}, monospace`;
   const sourceHref = href || `${FONT_SOURCES[source]}${slug || fontFamily}`;
-  // console.log(
-  //   "sourceHref=",
-  //   sourceHref,
-  //   "href=",
-  //   href,
-  //   "position=",
-  //   position,
-  //   "fontFamily=",
-  //   fontFamily,
-  //   "source=",
-  //   source,
-  //   "slug=",
-  //   slug
-  // );
   const sourceLink =
     title ||
     (sourceHref && (
@@ -135,7 +121,7 @@ const Showcase = ({
         >
           {/* <Typography variant="body2">{body}</Typography> */}
           {renderedBlocks.slice(0, 1)}
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Collapse in={open} timeout="auto" unmountOnExit>
             {renderedBlocks.slice(1)}
           </Collapse>
         </StyledBox>
@@ -144,15 +130,15 @@ const Showcase = ({
         {/* <Typography paragraph>{footer}</Typography> */}
         <Typography paragraph>{body}</Typography>
         <ExpandMore
-          expand={expanded}
+          expand={open}
           onClick={() =>
             dispatch({
               type: "toggleOne",
-              expanded,
-              position,
+              open,
+              key: defKey,
             })
           }
-          aria-expanded={expanded}
+          aria-expanded={open}
           aria-label="show more"
         >
           <ExpandMoreIcon />
@@ -163,7 +149,6 @@ const Showcase = ({
 };
 
 Showcase.propTypes = {
-  position: PropTypes.number,
   codeBlocks: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string,
   subtitle: PropTypes.string,
@@ -175,6 +160,7 @@ Showcase.propTypes = {
   boxShadow: PropTypes.number,
   body: PropTypes.string,
   href: PropTypes.string,
+  defKey: PropTypes.any,
 };
 
 export default Showcase;
